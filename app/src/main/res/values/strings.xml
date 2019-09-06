@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MeanScout</string>
+    <string name="match">Match</string>
+    <string name="team">Team</string>
+    <string name="no_show">No Show</string>
+    <string name="auto">Auto</string>
+    <string name="zero">0</string>
+    <string name="minus">-</string>
+    <string name="bunnies_collected">Bunnies Collected</string>
+    <string name="tubs_touched">Tubs Touched</string>
+    <string name="tub_supported">Tub Supported</string>
+    <string name="tele">Tele</string>
+    <string name="bunny_spoiled">Bunny Spoiled</string>
+    <string name="cubes_collected">Cubes Collected</string>
+    <string name="none">None</string>
+    <string name="yellow">Yellow</string>
+    <string name="red">Red</string>
+    <string name="penalty_card">Penalty Card</string>
+    <string name="drive_rating">Drive Rating</string>
+    <string name="comment">Comment</string>
+    <string name="breakdown">Breakdown (blank if none)</string>
+    <string name="submit">Submit</string>
+    <string name="confirm">Confirm</string>
+</resources>
