@@ -1,10 +1,17 @@
 package org.team2471.meanscout
 
-import android.content.Context
+import android.Manifest
+import android.content.pm.PackageManager
+import android.media.MediaScannerConnection
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
 import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +33,26 @@ class MainActivity : AppCompatActivity() {
     private lateinit var breakdownView: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1
+            )
+        }
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
+            )
+        }
         setContentView(R.layout.activity_main)
         teamView = findViewById(R.id.team)
         matchView = findViewById(R.id.match)
@@ -62,16 +89,16 @@ class MainActivity : AppCompatActivity() {
         collCubeIncView.text = cubesCollected.toString()
     }
 
-    fun onNoShow(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun onNoShow(@Suppress("UNUSED_PARAMETER") view: View) {
         noshowView.visibility = View.INVISIBLE
         confNoshowView.visibility = View.VISIBLE
     }
 
-    fun confNoShow(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun confNoShow(@Suppress("UNUSED_PARAMETER") view: View) {
         submit(true)
     }
 
-    fun onSubmit(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun onSubmit(@Suppress("UNUSED_PARAMETER") view: View) {
         submit(false)
     }
 
@@ -91,9 +118,15 @@ class MainActivity : AppCompatActivity() {
         }
         sb.append(",").append(driveRatingView.rating)
         sb.append(",").append(commentView.text).append(",").append(breakdownView.text)
-        applicationContext.openFileOutput("$filename.txt", Context.MODE_PRIVATE).use {
-            it.write(sb.toString().toByteArray())
-        }
+        val file = File(getExternalFilesDir(null), "$filename.txt")
+        file.writeText(sb.toString())
+        val fw = BufferedWriter(FileWriter(file, false))
+        fw.append(sb.toString())
+        fw.close()
+        MediaScannerConnection.scanFile(
+            applicationContext,
+            arrayOf(file.toString()), arrayOf("text/plain"), null
+        )
         match = try {
             Integer.parseInt(matchView.text.toString()) + 1
         } catch (e: NumberFormatException) {
