@@ -16,6 +16,7 @@ import java.io.FileWriter
 import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var tView: EditText   // Team
     private lateinit var mView: EditText   // Match
     private lateinit var nsView: Button    // No Show
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dView: RatingBar  // Driving
     private lateinit var cView: EditText   // Comment
     private lateinit var bView: EditText   // Breakdown
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (ContextCompat.checkSelfPermission(
@@ -73,10 +75,12 @@ class MainActivity : AppCompatActivity() {
         cView = findViewById(R.id.comment)
         bView = findViewById(R.id.breakdown)
     }
+
     private var match = 1
     private var bunniesCollected = 0
     private var tubsTouched = 0
     private var cubesCollected = 0
+
     fun crement(view: View) {
         if (view == biView && bunniesCollected < 6) bunniesCollected++
         if (view == tiView && tubsTouched < 8) tubsTouched++
@@ -103,6 +107,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun submit(show: Boolean) {
         cnsView.visibility = View.INVISIBLE
+
         val sb = StringBuilder()
         sb.append(tView.text, ",", mView.text)
         val filename = sb.toString()
@@ -115,7 +120,9 @@ class MainActivity : AppCompatActivity() {
             2131230852 -> sb.append(",red")
         }
         sb.append(",", dView.rating)
-        sb.append(",", cView.text, ",", bView.text)
+        sb.append(",", cView.text.replace(Regex(","), ""))
+        sb.append(",", bView.text.replace(Regex(","), ""))
+
         val file = File(getExternalFilesDir(null), "$filename.txt")
         file.writeText(sb.toString())
         val fw = BufferedWriter(FileWriter(file, false))
@@ -125,6 +132,7 @@ class MainActivity : AppCompatActivity() {
             applicationContext,
             arrayOf(file.toString()), arrayOf("text/plain"), null
         )
+
         match = try {
             Integer.parseInt(mView.text.toString()) + 1
         } catch (e: NumberFormatException) {
@@ -144,6 +152,7 @@ class MainActivity : AppCompatActivity() {
         dView.rating = 0.0f
         cView.setText("")
         bView.setText("")
+
         val submitToast = Toast.makeText(applicationContext, "Submitted", Toast.LENGTH_SHORT)
         submitToast.setGravity(Gravity.TOP, 0, 100)
         submitToast.show()

@@ -18,7 +18,7 @@
     <string name="penalty_card">Penalty Card</string>
     <string name="drive_rating">Drive Rating</string>
     <string name="comment">Comment</string>
-    <string name="breakdown">Breakdown (blank if none)</string>
+    <string name="breakdown">Breakdown</string>
     <string name="submit">Submit</string>
     <string name="confirm">Confirm</string>
 </resources>
