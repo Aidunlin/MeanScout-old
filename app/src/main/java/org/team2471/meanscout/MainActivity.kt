@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.media.MediaScannerConnection
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
@@ -72,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         cView = findViewById(R.id.comment)
         bView = findViewById(R.id.breakdown)
     }
-
     private var match = 1
     private var bunniesCollected = 0
     private var tubsTouched = 0
@@ -90,7 +90,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onNoShow(@Suppress("UNUSED_PARAMETER") view: View) {
-        nsView.visibility = View.INVISIBLE
         cnsView.visibility = View.VISIBLE
     }
 
@@ -103,7 +102,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun submit(show: Boolean) {
-        nsView.visibility = View.VISIBLE
         cnsView.visibility = View.INVISIBLE
         val sb = StringBuilder()
         sb.append(tView.text, ",", mView.text)
@@ -146,6 +144,9 @@ class MainActivity : AppCompatActivity() {
         dView.rating = 0.0f
         cView.setText("")
         bView.setText("")
-        Toast.makeText(applicationContext, "Submitted", Toast.LENGTH_SHORT).show()
+        val submitToast = Toast.makeText(applicationContext, "Submitted", Toast.LENGTH_SHORT)
+        submitToast.setGravity(Gravity.TOP, 0, 100)
+        submitToast.show()
+        tView.requestFocus()
     }
 }

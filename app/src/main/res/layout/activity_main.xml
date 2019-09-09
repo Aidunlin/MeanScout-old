@@ -4,411 +4,306 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/titleCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:cardCornerRadius="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/app_name"
-                    android:textColor="@android:color/white"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/leftCard"
+        <EditText
+            android:id="@+id/team"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/rightCard"
+            android:ems="10"
+            android:hint="@string/team"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="5"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/match"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleCard">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/team"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:hint="@string/team"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:maxLength="5"
-                    app:layout_constraintEnd_toStartOf="@+id/match"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/match"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:ems="10"
-                    android:hint="@string/match"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    app:layout_constraintEnd_toStartOf="@+id/noshow"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/team"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/noshow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="?attr/colorButtonNormal"
-                    android:onClick="onNoShow"
-                    android:text="@string/no_show"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/match"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/confNoshow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@color/colorAccent"
-                    android:onClick="confNoShow"
-                    android:text="@string/confirm"
-                    android:textSize="14sp"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <CheckBox
-                    android:id="@+id/supTub"
-                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:padding="8dp"
-                    android:text="@string/tub_supported"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/noshow" />
-
-                <Button
-                    android:id="@+id/collBunnyInc"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="?attr/colorButtonNormal"
-                    android:onClick="crement"
-                    android:text="@string/zero"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/supTub" />
-
-                <Button
-                    android:id="@+id/collBunnyDec"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="?attr/colorButtonNormal"
-                    android:onClick="crement"
-                    android:text="@string/minus"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/collBunnyInc"
-                    app:layout_constraintTop_toBottomOf="@id/supTub" />
-
-                <TextView
-                    android:id="@+id/collBunnyText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/bunnies_collected"
-                    app:layout_constraintStart_toStartOf="@+id/collBunnyInc"
-                    app:layout_constraintTop_toBottomOf="@id/collBunnyInc" />
-
-                <Button
-                    android:id="@+id/touchTubInc"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="?attr/colorButtonNormal"
-                    android:onClick="crement"
-                    android:text="@string/zero"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/touchTubDec"
-                    app:layout_constraintTop_toBottomOf="@id/supTub" />
-
-                <Button
-                    android:id="@+id/touchTubDec"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="?attr/colorButtonNormal"
-                    android:onClick="crement"
-                    android:text="@string/minus"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/supTub" />
-
-                <TextView
-                    android:id="@+id/touchTubText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/tubs_touched"
-                    app:layout_constraintStart_toStartOf="@+id/touchTubInc"
-                    app:layout_constraintTop_toBottomOf="@+id/touchTubInc" />
-
-                <CheckBox
-                    android:id="@+id/spoiledBunny"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:padding="8dp"
-                    android:text="@string/bunny_spoiled"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/collBunnyText" />
-
-                <Button
-                    android:id="@+id/collCubeInc"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="?attr/colorButtonNormal"
-                    android:onClick="crement"
-                    android:text="@string/zero"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spoiledBunny" />
-
-                <Button
-                    android:id="@+id/collCubeDec"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="?attr/colorButtonNormal"
-                    android:onClick="crement"
-                    android:text="@string/minus"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toEndOf="@+id/collCubeInc"
-                    app:layout_constraintTop_toBottomOf="@+id/spoiledBunny" />
-
-                <TextView
-                    android:id="@+id/collCubeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/cubes_collected"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/collCubeInc"
-                    app:layout_constraintTop_toBottomOf="@+id/collCubeInc" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/rightCard"
+        <EditText
+            android:id="@+id/match"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/match"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/leftCard"
-            app:layout_constraintTop_toBottomOf="@+id/titleCard">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/team"
+            app:layout_constraintTop_toTopOf="@+id/team" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/noshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="onNoShow"
+            android:text="@string/no_show"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/team"
+            app:layout_constraintTop_toBottomOf="@+id/team" />
 
-                <TextView
-                    android:id="@+id/penaltyText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:text="@string/penalty_card"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/confNoshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="confNoShow"
+            android:text="@string/confirm"
+            android:textSize="30sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/match"
+            app:layout_constraintTop_toBottomOf="@+id/match" />
 
-                <RadioGroup
-                    android:id="@+id/penalty"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:checkedButton="@id/penaltyNone"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/penaltyText">
+        <CheckBox
+            android:id="@+id/supTub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:text="@string/tub_supported"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/noshow"
+            app:layout_constraintTop_toBottomOf="@id/noshow" />
 
-                    <RadioButton
-                        android:id="@+id/penaltyNone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="@string/none"
-                        android:textSize="18sp" />
+        <Button
+            android:id="@+id/collBunnyInc"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="crement"
+            android:text="@string/zero"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/supTub"
+            app:layout_constraintTop_toBottomOf="@+id/supTub" />
 
-                    <RadioButton
-                        android:id="@+id/penaltyYellow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="@string/yellow"
-                        android:textSize="18sp" />
+        <Button
+            android:id="@+id/collBunnyDec"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:onClick="crement"
+            android:text="@string/minus"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/collBunnyInc"
+            app:layout_constraintTop_toTopOf="@+id/collBunnyInc" />
 
-                    <RadioButton
-                        android:id="@+id/penaltyRed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:text="@string/red"
-                        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/collBunnyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/bunnies_collected"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/collBunnyDec"
+            app:layout_constraintStart_toEndOf="@+id/collBunnyDec"
+            app:layout_constraintTop_toTopOf="@+id/collBunnyDec" />
 
-                </RadioGroup>
+        <Button
+            android:id="@+id/touchTubInc"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="crement"
+            android:text="@string/zero"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/collBunnyInc"
+            app:layout_constraintTop_toBottomOf="@+id/collBunnyInc" />
 
-                <TextView
-                    android:id="@+id/driveRatingText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/drive_rating"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/penalty" />
+        <Button
+            android:id="@+id/touchTubDec"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:onClick="crement"
+            android:text="@string/minus"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/touchTubInc"
+            app:layout_constraintTop_toTopOf="@+id/touchTubInc" />
 
-                <RatingBar
-                    android:id="@+id/driveRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:stepSize="1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/driveRatingText" />
+        <TextView
+            android:id="@+id/touchTubText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/tubs_touched"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/touchTubDec"
+            app:layout_constraintStart_toEndOf="@+id/touchTubDec"
+            app:layout_constraintTop_toTopOf="@+id/touchTubDec" />
 
-                <EditText
-                    android:id="@+id/comment"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:ems="10"
-                    android:hint="@string/comment"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/driveRating" />
+        <CheckBox
+            android:id="@+id/spoiledBunny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:text="@string/bunny_spoiled"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/touchTubInc"
+            app:layout_constraintTop_toBottomOf="@+id/touchTubInc" />
 
-                <EditText
-                    android:id="@+id/breakdown"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:ems="10"
-                    android:hint="@string/breakdown"
-                    android:importantForAutofill="no"
-                    android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/comment" />
+        <Button
+            android:id="@+id/collCubeInc"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="crement"
+            android:text="@string/zero"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/spoiledBunny"
+            app:layout_constraintTop_toBottomOf="@+id/spoiledBunny" />
 
-                <Button
-                    android:id="@+id/submit"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/colorAccent"
-                    android:onClick="onSubmit"
-                    android:text="@string/submit"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/breakdown" />
+        <Button
+            android:id="@+id/collCubeDec"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:onClick="crement"
+            android:text="@string/minus"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/collCubeInc"
+            app:layout_constraintTop_toTopOf="@+id/collCubeInc" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/collCubeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/cubes_collected"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/collCubeDec"
+            app:layout_constraintStart_toEndOf="@+id/collCubeDec"
+            app:layout_constraintTop_toTopOf="@+id/collCubeDec" />
 
-        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/penaltyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="@string/penalty_card"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/collCubeInc"
+            app:layout_constraintTop_toBottomOf="@+id/collCubeInc" />
+
+        <RadioGroup
+            android:id="@+id/penalty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:checkedButton="@id/penaltyNone"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/penaltyText"
+            app:layout_constraintTop_toBottomOf="@+id/penaltyText">
+
+            <RadioButton
+                android:id="@+id/penaltyNone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/none"
+                android:textSize="30sp" />
+
+            <RadioButton
+                android:id="@+id/penaltyYellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/yellow"
+                android:textSize="30sp" />
+
+            <RadioButton
+                android:id="@+id/penaltyRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="@string/red"
+                android:textSize="30sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/driveRatingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/drive_rating"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/penalty"
+            app:layout_constraintTop_toBottomOf="@+id/penalty" />
+
+        <RatingBar
+            android:id="@+id/driveRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:stepSize="1"
+            app:layout_constraintStart_toStartOf="@+id/driveRatingText"
+            app:layout_constraintTop_toBottomOf="@+id/driveRatingText" />
+
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/comment"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/driveRating" />
+
+        <EditText
+            android:id="@+id/breakdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/breakdown"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comment" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="onSubmit"
+            android:text="@string/submit"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/breakdown" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
