@@ -3,17 +3,16 @@ package org.team2471.meanscout
 import android.Manifest
 import android.content.pm.PackageManager
 import android.media.MediaScannerConnection
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
-import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
 
@@ -110,27 +109,26 @@ class MainActivity : AppCompatActivity() {
 
         val sb = StringBuilder()
         sb.append(tView.text, ",", mView.text)
-        val filename = sb.toString()
         sb.append(",", show, ",", stView.isChecked)
         sb.append(",", bunniesCollected, ",", tubsTouched)
         sb.append(",", sbView.isChecked, ",", cubesCollected)
-        when (pView.checkedRadioButtonId) {
-            2131230851 -> sb.append(",none")
-            2131230854 -> sb.append(",yellow")
-            2131230852 -> sb.append(",red")
+        when (pView.indexOfChild(findViewById<RadioButton>(pView.checkedRadioButtonId))) {
+            0 -> sb.append(",none")
+            1 -> sb.append(",yellow")
+            2 -> sb.append(",red")
         }
         sb.append(",", dView.rating)
         sb.append(",", cView.text.replace(Regex(","), ""))
         sb.append(",", bView.text.replace(Regex(","), ""))
 
-        val file = File(getExternalFilesDir(null), "$filename.txt")
-        file.writeText(sb.toString())
-        val fw = BufferedWriter(FileWriter(file, false))
-        fw.append(sb.toString())
+        val file = File(getExternalFilesDir(null), "surveys.txt")
+        val fw = BufferedWriter(FileWriter(file, true))
+        fw.write(sb.toString())
+        fw.newLine()
         fw.close()
         MediaScannerConnection.scanFile(
             applicationContext,
-            arrayOf(file.toString()), arrayOf("text/plain"), null
+            arrayOf(file.absolutePath), arrayOf("text/plain"), null
         )
 
         match = try {

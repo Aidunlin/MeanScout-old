@@ -17,7 +17,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:ems="10"
             android:hint="@string/team"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -34,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="32dp"
-            android:ems="10"
             android:hint="@string/match"
             android:importantForAutofill="no"
             android:inputType="number"
@@ -101,7 +99,6 @@
             app:layout_constraintTop_toTopOf="@+id/collBunnyInc" />
 
         <TextView
-            android:id="@+id/collBunnyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -133,7 +130,6 @@
             app:layout_constraintTop_toTopOf="@+id/touchTubInc" />
 
         <TextView
-            android:id="@+id/touchTubText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -176,7 +172,6 @@
             app:layout_constraintTop_toTopOf="@+id/collCubeInc" />
 
         <TextView
-            android:id="@+id/collCubeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -218,7 +213,6 @@
                 android:textSize="30sp" />
 
             <RadioButton
-                android:id="@+id/penaltyYellow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -228,7 +222,6 @@
                 android:textSize="30sp" />
 
             <RadioButton
-                android:id="@+id/penaltyRed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -264,7 +257,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:ems="10"
             android:hint="@string/comment"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
@@ -280,7 +272,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:ems="10"
             android:hint="@string/breakdown"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
@@ -290,7 +281,6 @@
             app:layout_constraintTop_toBottomOf="@+id/comment" />
 
         <Button
-            android:id="@+id/submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
