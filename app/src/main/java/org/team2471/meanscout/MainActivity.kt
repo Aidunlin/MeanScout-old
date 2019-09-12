@@ -97,27 +97,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun confNoShow(@Suppress("UNUSED_PARAMETER") view: View) {
-        submit(true)
+        submit(1)
     }
 
     fun onSubmit(@Suppress("UNUSED_PARAMETER") view: View) {
-        submit(false)
+        submit(0)
     }
 
-    private fun submit(show: Boolean) {
+    private fun submit(noShow: Int) {
         cnsView.visibility = View.INVISIBLE
 
         val sb = StringBuilder()
         sb.append(tView.text, ",", mView.text)
-        sb.append(",", show, ",", stView.isChecked)
-        sb.append(",", bunniesCollected, ",", tubsTouched)
-        sb.append(",", sbView.isChecked, ",", cubesCollected)
-        when (pView.indexOfChild(findViewById<RadioButton>(pView.checkedRadioButtonId))) {
-            0 -> sb.append(",none")
-            1 -> sb.append(",yellow")
-            2 -> sb.append(",red")
+        val stViewChecked = if (stView.isChecked) {
+            1
+        } else {
+            0
         }
-        sb.append(",", dView.rating)
+        sb.append(",", noShow, ",", stViewChecked)
+        sb.append(",", bunniesCollected, ",", tubsTouched)
+        val sbViewChecked = if (sbView.isChecked) {
+            1
+        } else {
+            0
+        }
+        sb.append(",", sbViewChecked, ",", cubesCollected)
+        sb.append(",", pView.indexOfChild(findViewById<RadioButton>(pView.checkedRadioButtonId)))
+        sb.append(",", dView.rating.toInt())
         sb.append(",", cView.text.replace(Regex(","), ""))
         sb.append(",", bView.text.replace(Regex(","), ""))
 
