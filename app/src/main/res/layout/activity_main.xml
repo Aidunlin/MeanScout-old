@@ -22,10 +22,25 @@
             android:inputType="number"
             android:maxLength="5"
             android:textSize="30sp"
-            app:layout_constraintEnd_toStartOf="@+id/match"
+            app:layout_constraintEnd_toStartOf="@+id/suffix"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/suffix"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/suffix"
+            android:importantForAutofill="no"
+            android:inputType="textCapCharacters"
+            android:maxLength="1"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/match"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/team"
+            app:layout_constraintTop_toTopOf="@+id/team" />
 
         <EditText
             android:id="@+id/match"
@@ -40,8 +55,8 @@
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/team"
-            app:layout_constraintTop_toTopOf="@+id/team" />
+            app:layout_constraintStart_toEndOf="@+id/suffix"
+            app:layout_constraintTop_toTopOf="@+id/suffix" />
 
         <Button
             android:id="@+id/noshow"

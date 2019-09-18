@@ -17,6 +17,7 @@ import java.io.FileWriter
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tView: EditText   // Team
+    private lateinit var sView: EditText   // Team Suffix
     private lateinit var mView: EditText   // Match
     private lateinit var nsView: Button    // No Show
     private lateinit var cnsView: Button   // Confirm No Show
@@ -35,28 +36,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1
-            )
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         }
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1
-            )
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         }
         setContentView(R.layout.activity_main)
         tView = findViewById(R.id.team)
+        sView = findViewById(R.id.suffix)
         mView = findViewById(R.id.match)
         mView.setText(match.toString())
         nsView = findViewById(R.id.noshow)
@@ -108,19 +96,11 @@ class MainActivity : AppCompatActivity() {
         cnsView.visibility = View.INVISIBLE
 
         val sb = StringBuilder()
-        sb.append(tView.text, ",", mView.text)
-        val stViewChecked = if (stView.isChecked) {
-            1
-        } else {
-            0
-        }
+        sb.append(tView.text, sView.text, ",", mView.text)
+        val stViewChecked = if (stView.isChecked) { 1 } else { 0 }
         sb.append(",", noShow, ",", stViewChecked)
         sb.append(",", bunniesCollected, ",", tubsTouched)
-        val sbViewChecked = if (sbView.isChecked) {
-            1
-        } else {
-            0
-        }
+        val sbViewChecked = if (sbView.isChecked) { 1 } else { 0 }
         sb.append(",", sbViewChecked, ",", cubesCollected)
         sb.append(",", pView.indexOfChild(findViewById<RadioButton>(pView.checkedRadioButtonId)))
         sb.append(",", dView.rating.toInt())
@@ -137,13 +117,10 @@ class MainActivity : AppCompatActivity() {
             arrayOf(file.absolutePath), arrayOf("text/plain"), null
         )
 
-        match = try {
-            Integer.parseInt(mView.text.toString()) + 1
-        } catch (e: NumberFormatException) {
-            1
-        }
+        match = try { Integer.parseInt(mView.text.toString()) + 1 } catch (e: NumberFormatException) { 1 }
         mView.setText(match.toString())
         tView.setText("")
+        sView.setText("")
         stView.isChecked = false
         biView.text = "0"
         bunniesCollected = 0
