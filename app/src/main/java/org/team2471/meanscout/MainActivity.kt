@@ -16,6 +16,7 @@ import java.io.FileWriter
 
 class MainActivity : AppCompatActivity() {
 
+    // Declare variables relating to layout elements
     private lateinit var tView: EditText   // Team
     private lateinit var sView: EditText   // Team Suffix
     private lateinit var mView: EditText   // Match
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Make sure storage permissions are granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         }
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         }
         setContentView(R.layout.activity_main)
+        // Actually set variables (relating to layout elements) to layout elements
         tView = findViewById(R.id.team)
         sView = findViewById(R.id.suffix)
         mView = findViewById(R.id.match)
@@ -63,11 +66,13 @@ class MainActivity : AppCompatActivity() {
         bView = findViewById(R.id.breakdown)
     }
 
+    // Incremental/decremental variables
     private var match = 1
     private var bunniesCollected = 0
     private var tubsTouched = 0
     private var cubesCollected = 0
 
+    // Increment/decrement a variable depending on button pressed
     fun crement(view: View) {
         if (view == biView && bunniesCollected < 6) bunniesCollected++
         if (view == tiView && tubsTouched < 8) tubsTouched++
@@ -80,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         ciView.text = cubesCollected.toString()
     }
 
+    // Require second button press to confirm no show
     fun onNoShow(@Suppress("UNUSED_PARAMETER") view: View) {
         cnsView.visibility = View.VISIBLE
     }
@@ -92,11 +98,12 @@ class MainActivity : AppCompatActivity() {
         submit(0)
     }
 
+    // Put all variables into string, save string to file, reset layout elements
     private fun submit(noShow: Int) {
         cnsView.visibility = View.INVISIBLE
 
         val sb = StringBuilder()
-        sb.append(tView.text, sView.text, ",", mView.text)
+        sb.append(tView.text, sView.text.replace(Regex(","), ""), ",", mView.text)
         val stViewChecked = if (stView.isChecked) { 1 } else { 0 }
         sb.append(",", noShow, ",", stViewChecked)
         sb.append(",", bunniesCollected, ",", tubsTouched)
