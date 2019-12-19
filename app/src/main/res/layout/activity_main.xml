@@ -73,12 +73,20 @@
             android:id="@+id/confNoshow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:onClick="confNoShow"
             android:text="@string/confirm"
             android:textSize="30sp"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/match"
+            app:layout_constraintStart_toEndOf="@+id/noshow"
+            app:layout_constraintTop_toTopOf="@+id/noshow" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/match" />
 
         <CheckBox
@@ -264,6 +272,27 @@
             android:stepSize="1"
             app:layout_constraintStart_toStartOf="@+id/driveRatingText"
             app:layout_constraintTop_toBottomOf="@+id/driveRatingText" />
+
+        <TextView
+            android:id="@+id/defenseRatingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/defense_rating"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/penalty" />
+
+        <RatingBar
+            android:id="@+id/defenseRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleX="-1"
+            android:stepSize="1"
+            app:layout_constraintEnd_toEndOf="@+id/defenseRatingText"
+            app:layout_constraintTop_toBottomOf="@+id/defenseRatingText" />
 
         <EditText
             android:id="@+id/comment"

@@ -1,3 +1,8 @@
+/*
+* MeanScout
+* A scouting app for BunnyBots 2019
+*/
+
 package org.team2471.meanscout
 
 import android.Manifest
@@ -32,11 +37,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cdView: Button    // Cube Decrement
     private lateinit var pView: RadioGroup // Penalty
     private lateinit var dView: RatingBar  // Driving
+    private lateinit var dfView: RatingBar // Defense
     private lateinit var cView: EditText   // Comment
     private lateinit var bView: EditText   // Breakdown
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Make sure storage permissions are granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
@@ -45,7 +52,8 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         }
         setContentView(R.layout.activity_main)
-        // Actually set variables (relating to layout elements) to layout elements
+
+        // Actually set layout element variables to layout elements
         tView = findViewById(R.id.team)
         sView = findViewById(R.id.suffix)
         mView = findViewById(R.id.match)
@@ -62,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         cdView = findViewById(R.id.collCubeDec)
         pView = findViewById(R.id.penalty)
         dView = findViewById(R.id.driveRating)
+        dfView = findViewById(R.id.defenseRating)
         cView = findViewById(R.id.comment)
         bView = findViewById(R.id.breakdown)
     }
@@ -98,10 +107,9 @@ class MainActivity : AppCompatActivity() {
         submit(0)
     }
 
-    // Put all variables into string, save string to file, reset layout elements
+    // Submit sequence
     private fun submit(noShow: Int) {
-        cnsView.visibility = View.INVISIBLE
-
+        // Collect data into string
         val sb = StringBuilder()
         sb.append(tView.text, sView.text.replace(Regex(","), ""), ",", mView.text)
         val stViewChecked = if (stView.isChecked) { 1 } else { 0 }
@@ -110,10 +118,11 @@ class MainActivity : AppCompatActivity() {
         val sbViewChecked = if (sbView.isChecked) { 1 } else { 0 }
         sb.append(",", sbViewChecked, ",", cubesCollected)
         sb.append(",", pView.indexOfChild(findViewById<RadioButton>(pView.checkedRadioButtonId)))
-        sb.append(",", dView.rating.toInt())
+        sb.append(",", dView.rating.toInt(), ",", dfView.rating.toInt())
         sb.append(",", cView.text.replace(Regex(","), ""))
         sb.append(",", bView.text.replace(Regex(","), ""))
 
+        // Save string to file
         val file = File(getExternalFilesDir(null), "surveys.txt")
         val fw = BufferedWriter(FileWriter(file, true))
         fw.write(sb.toString())
@@ -124,6 +133,7 @@ class MainActivity : AppCompatActivity() {
             arrayOf(file.absolutePath), arrayOf("text/plain"), null
         )
 
+        // Reset layout elements
         match = try { Integer.parseInt(mView.text.toString()) + 1 } catch (e: NumberFormatException) { 1 }
         mView.setText(match.toString())
         tView.setText("")
@@ -138,9 +148,12 @@ class MainActivity : AppCompatActivity() {
         cubesCollected = 0
         pView.check(R.id.penaltyNone)
         dView.rating = 0.0f
+        dfView.rating = 0.0f
         cView.setText("")
         bView.setText("")
+        cnsView.visibility = View.INVISIBLE
 
+        // Confirm submission
         val submitToast = Toast.makeText(applicationContext, "Submitted", Toast.LENGTH_SHORT)
         submitToast.setGravity(Gravity.TOP, 0, 100)
         submitToast.show()
