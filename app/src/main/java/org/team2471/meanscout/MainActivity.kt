@@ -15,9 +15,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileWriter
+import java.io.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +25,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mView: EditText   // Match
     private lateinit var nsView: Button    // No Show
     private lateinit var cnsView: Button   // Confirm No Show
+    private lateinit var lView: TextView   // Location Text
+    private lateinit var lsView: EditText  // Location EditText
+    private lateinit var lcView: Button    // Location Set
     private lateinit var stView: CheckBox  // Supported Tub
     private lateinit var biView: Button    // Bunny Increment
     private lateinit var bdView: Button    // Bunny Decrement
@@ -60,6 +61,9 @@ class MainActivity : AppCompatActivity() {
         mView.setText(match.toString())
         nsView = findViewById(R.id.noshow)
         cnsView = findViewById(R.id.confNoshow)
+        lView = findViewById(R.id.location)
+        lsView = findViewById(R.id.locationSetter)
+        lcView = findViewById(R.id.locationConf)
         stView = findViewById(R.id.supTub)
         biView = findViewById(R.id.collBunnyInc)
         bdView = findViewById(R.id.collBunnyDec)
@@ -73,6 +77,30 @@ class MainActivity : AppCompatActivity() {
         dfView = findViewById(R.id.defenseRating)
         cView = findViewById(R.id.comment)
         bView = findViewById(R.id.breakdown)
+
+        val lFile = File(getExternalFilesDir(null), "location.txt")
+        try {
+            val lf = BufferedReader(FileReader(lFile))
+            lView.text = lf.readLine()
+            lf.close()
+        } catch (e: FileNotFoundException) {
+            lsView.visibility = View.VISIBLE
+            lcView.visibility = View.VISIBLE
+        }
+        MediaScannerConnection.scanFile(
+            applicationContext,
+            arrayOf(lFile.absolutePath), arrayOf("text/plain"), null
+        )
+    }
+
+    fun updateLocation(@Suppress("UNUSED_PARAMETER") view: View) {
+        lsView.visibility = View.INVISIBLE
+        lcView.visibility = View.INVISIBLE
+        lView.text = lsView.text
+        val lFile = File(getExternalFilesDir(null), "location.txt")
+        val lf = BufferedWriter(FileWriter(lFile))
+        lf.write(lView.text.toString())
+        lf.close()
     }
 
     // Incremental/decremental variables
@@ -112,11 +140,9 @@ class MainActivity : AppCompatActivity() {
         // Collect data into string
         val sb = StringBuilder()
         sb.append(tView.text, sView.text.replace(Regex(","), ""), ",", mView.text)
-        val stViewChecked = if (stView.isChecked) { 1 } else { 0 }
-        sb.append(",", noShow, ",", stViewChecked)
+        sb.append(",", noShow, ",", if (stView.isChecked) { 1 } else { 0 })
         sb.append(",", bunniesCollected, ",", tubsTouched)
-        val sbViewChecked = if (sbView.isChecked) { 1 } else { 0 }
-        sb.append(",", sbViewChecked, ",", cubesCollected)
+        sb.append(",", if (sbView.isChecked) { 1 } else { 0 }, ",", cubesCollected)
         sb.append(",", pView.indexOfChild(findViewById<RadioButton>(pView.checkedRadioButtonId)))
         sb.append(",", dView.rating.toInt(), ",", dfView.rating.toInt())
         sb.append(",", cView.text.replace(Regex(","), ""))

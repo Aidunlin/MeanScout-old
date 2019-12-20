@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">MeanScout</string>
-    <string name="match">Match</string>
     <string name="team">Team</string>
+    <string name="match">Match</string>
+    <string name="suffix">Suffix</string>
     <string name="no_show">No Show</string>
+    <string name="confirm">Confirm</string>
+    <string name="location">Location</string>
+    <string name="set">Set</string>
     <string name="zero">0</string>
     <string name="minus">-</string>
+    <string name="tub_supported">Tub Supported</string>
     <string name="bunnies_collected">Bunnies Collected</string>
     <string name="tubs_touched">Tubs Touched</string>
-    <string name="tub_supported">Tub Supported</string>
     <string name="bunny_spoiled">Bunny Spoiled</string>
     <string name="cubes_collected">Cubes Collected</string>
     <string name="none">None</string>
@@ -19,6 +23,4 @@
     <string name="comment">Comment</string>
     <string name="breakdown">Breakdown</string>
     <string name="submit">Submit</string>
-    <string name="confirm">Confirm</string>
-    <string name="suffix">Suffix</string>
 </resources>
